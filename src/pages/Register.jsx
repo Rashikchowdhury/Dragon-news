@@ -1,18 +1,35 @@
-import React from 'react';
+import React, { use } from 'react';
 import { Link } from 'react-router';
+import { AuthContext } from '../Provider/AuthContext';
 
 const Register = () => {
+    const { signUpUser } = use(AuthContext)
+
+    const handleRegister = (e) => {
+        e.preventDefault()
+
+        const name = e.target.name.value;
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        const photo_url = e.target.photo_url.value;
+        
+        signUpUser(email, password)
+        .then(result => console.log(result))
+        .catch(error => alert(error))
+
+    }
+
     return (
         <div className="flex justify-center h-[80vh] items-center">
             <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-5">
                 <h2 className="font-semibold text-2xl text-center">
                     Register your account
                 </h2>
-                <fieldset className="fieldset card-body">
+                <form onSubmit={handleRegister} className="fieldset card-body">
                     {/* Name  */}
                     <label className="label">Name</label>
                     <input
-                        name="Name"
+                        name="name"
                         type="text"
                         className="input"
                         placeholder="Name"
@@ -21,7 +38,7 @@ const Register = () => {
                     {/* photo_url  */}
                     <label className="label">Photo_url</label>
                     <input
-                        name="Photo_url"
+                        name="photo_url"
                         type="text"
                         className="input"
                         placeholder="Photo_url"
@@ -55,7 +72,7 @@ const Register = () => {
                             Login
                         </Link>
                     </p>
-                </fieldset>
+                </form>
             </div>
         </div>
     );

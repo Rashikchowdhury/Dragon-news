@@ -1,7 +1,31 @@
-import React from 'react';
+import React, { use, useState } from 'react';
 import { Link } from 'react-router';
+import { FaRegEye, FaEyeSlash } from "react-icons/fa";
+import { AuthContext } from '../Provider/AuthContext';
 
 const Login = () => {
+    const { signInUser } = use(AuthContext)
+
+    const handleSignIn = (e) => {
+        e.preventDefault()
+
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+
+        signInUser(email, password)
+        .then(result => {
+            console.log(result)
+        })
+        .catch(error => {
+            alert(error)
+        })
+    }
+
+    const [showPass, setShowPass] = useState(true)
+
+    const showPassword = () => {
+        setShowPass(!showPass)
+    }
 
     return (
         <div className="flex justify-center h-[80vh] items-center">
@@ -9,7 +33,7 @@ const Login = () => {
                 <h2 className="font-semibold text-2xl text-center">
                     Login your account
                 </h2>
-                <fieldset className="fieldset card-body">
+                <form onSubmit={handleSignIn} className="fieldset card-body">
                     {/* email  */}
                     <label className="label">Email</label>
                     <input
@@ -21,13 +45,23 @@ const Login = () => {
                     />
                     {/* passowrd  */}
                     <label className="label">Password</label>
-                    <input
-                        name="password"
-                        type="password"
-                        className="input"
-                        placeholder="Password"
-                        required
-                    />
+                    <div className='relative'>
+                        <input
+                            name="password"
+                            type={showPass ? "password" : "text"}
+                            className="input"
+                            placeholder="Password"
+                            required
+                        />
+                        <button onClick={showPassword} type='button' className='absolute right-6 top-3' >
+                            {
+                                showPass ?
+                                    <FaRegEye size={15} />
+                                    :
+                                    <FaEyeSlash size={15} />
+                            }
+                        </button>
+                    </div>
                     <div>
                         <a className="link link-hover">Forgot password?</a>
                     </div>
@@ -41,7 +75,7 @@ const Login = () => {
                             Register
                         </Link>
                     </p>
-                </fieldset>
+                </form>
             </div>
         </div>
     );

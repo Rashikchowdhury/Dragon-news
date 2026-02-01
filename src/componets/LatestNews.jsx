@@ -7,7 +7,7 @@ const LatestNews = () => {
             <p className='bg-secondary text-white p-2'>Latest</p>
             <Marquee pauseOnHover={true}>
                 <p className='font-semibold'>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea itaque ut similique cumque, earum aut consequuntur quisquam nostrum, nisi praesentium impedit incidunt
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia consequuntur autem modi corrupti similique architecto provident dignissimos! Libero, magni alias!                      
                 </p>
             </Marquee>
         </div>
