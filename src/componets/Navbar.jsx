@@ -1,12 +1,30 @@
-import React from 'react';
+import React, { use } from 'react';
 import { NavLink } from 'react-router';
 import user from "../assets/user.png"
+import { AuthContext } from '../Provider/AuthContext';
+import { signOut } from 'firebase/auth';
+import { auth } from '../Firebase/firebase.config';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
+    const { currentUser } = use(AuthContext);
+
+    const handleLogout = () => {
+        signOut(auth)
+        .then(() => {
+            toast.success("User loged out successfully")
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+
     return (
         <div className='flex items-center justify-between mt-4'>
-            <div className=" w-1/9">
-
+            <div className="w-1/9">
+                {
+                    currentUser ? currentUser.email : ""
+                }
             </div>
 
             <div className="nav flex gap-4 text-accent">
@@ -17,7 +35,12 @@ const Navbar = () => {
 
             <div className="login-btn flex items-center gap-2">
                 <img src={user} alt="" />
-                <NavLink to={"/auth/login"}><button className="btn btn-primary text-white px-10">Login</button></NavLink>
+                {
+                    currentUser ?
+                        <button onClick={handleLogout} className='btn btn-primary text-white'>Logout</button>
+                        :
+                        <NavLink to={"/auth/login"}><button className="btn btn-primary text-white px-10">Login</button></NavLink>
+                }
             </div>
         </div>
     );

@@ -1,10 +1,11 @@
 import React from 'react';
 import { FaRegBookmark } from 'react-icons/fa';
 import { IoMdShare } from 'react-icons/io';
+import { Link } from 'react-router';
 
 const SingleCategoryNews = ({ news }) => {
 
-    const { title, author, image_url, details, rating, total_view } = news
+    const { title, author, image_url, details, rating, total_view, id } = news
 
     const publishedDate = new Date(author.published_date).toLocaleDateString()
 
@@ -42,7 +43,7 @@ const SingleCategoryNews = ({ news }) => {
                             <>
                                 {details.slice(0, 400)}......
                                 <span className="text-blue-500 cursor-pointer">
-                                    read more
+                                    <Link to={`/newsDetails/${id}`}>read more</Link>
                                 </span>
                             </>
                         ) : (

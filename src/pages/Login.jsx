@@ -1,7 +1,8 @@
 import React, { use, useState } from 'react';
-import { Link } from 'react-router';
+import { Link, Navigate } from 'react-router';
 import { FaRegEye, FaEyeSlash } from "react-icons/fa";
 import { AuthContext } from '../Provider/AuthContext';
+import { toast } from 'react-toastify';
 
 const Login = () => {
     const { signInUser } = use(AuthContext)
@@ -13,12 +14,12 @@ const Login = () => {
         const password = e.target.password.value;
 
         signInUser(email, password)
-        .then(result => {
-            console.log(result)
-        })
-        .catch(error => {
-            alert(error)
-        })
+            .then(result => {
+                toast.success(`login with: ${result.user.email}`)
+            })
+            .catch(error => {
+                alert(error)
+            })
     }
 
     const [showPass, setShowPass] = useState(true)

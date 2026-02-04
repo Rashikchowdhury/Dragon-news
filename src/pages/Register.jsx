@@ -1,6 +1,7 @@
 import React, { use } from 'react';
-import { Link } from 'react-router';
+import { Link, Navigate } from 'react-router';
 import { AuthContext } from '../Provider/AuthContext';
+import { toast } from 'react-toastify';
 
 const Register = () => {
     const { signUpUser } = use(AuthContext)
@@ -14,7 +15,9 @@ const Register = () => {
         const photo_url = e.target.photo_url.value;
         
         signUpUser(email, password)
-        .then(result => console.log(result))
+        .then(result => {
+            toast.success(`Registerd with: ${result.user.email}`)
+        })
         .catch(error => alert(error))
 
     }
