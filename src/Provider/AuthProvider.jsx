@@ -14,10 +14,12 @@ const AuthProvider = ({ children }) => {
     }
 
     const [currentUser, setCurrentUser] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setCurrentUser(currentUser)
+            setCurrentUser(currentUser),
+            setLoading(false)
         })
 
         return () =>  unsubscribe()
@@ -26,7 +28,10 @@ const AuthProvider = ({ children }) => {
     const authData = {
         signUpUser,
         signInUser,
-        currentUser
+        currentUser,
+        loading, 
+        setLoading
+
     }
 
     return (
