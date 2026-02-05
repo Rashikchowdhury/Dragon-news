@@ -6,8 +6,7 @@ import { auth } from '../Firebase/firebase.config';
 
 const Register = () => {
     const { signUpUser, updateUserProfile } = use(AuthContext)
-    const navigate = useNavigate()
-    console.log(auth.currentUser)
+    const navigate = useNavigate();
 
     const handleRegister = (e) => {
         e.preventDefault()
