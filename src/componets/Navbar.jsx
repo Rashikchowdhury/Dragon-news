@@ -11,19 +11,19 @@ const Navbar = () => {
 
     const handleLogout = () => {
         signOut(auth)
-        .then(() => {
-            toast.success("User loged out successfully")
-        })
-        .catch(error => {
-            console.log(error)
-        })
+            .then(() => {
+                toast.success("User loged out successfully")
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     return (
         <div className='flex items-center justify-between mt-4'>
-            <div className="w-1/9">
+            <div className="">
                 {
-                    currentUser ? currentUser.email : ""
+                    currentUser ? currentUser.displayName : ""
                 }
             </div>
 
@@ -34,7 +34,8 @@ const Navbar = () => {
             </div>
 
             <div className="login-btn flex items-center gap-2">
-                <img src={user} alt="" />
+                <img src={currentUser?.photoURL ? currentUser.photoURL : user} alt="" className='w-12 h-12 rounded-full object-cover' />
+
                 {
                     currentUser ?
                         <button onClick={handleLogout} className='btn btn-primary text-white'>Logout</button>

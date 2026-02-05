@@ -1,11 +1,13 @@
 import React, { use, useState } from 'react';
-import { Link, Navigate } from 'react-router';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router';
 import { FaRegEye, FaEyeSlash } from "react-icons/fa";
 import { AuthContext } from '../Provider/AuthContext';
 import { toast } from 'react-toastify';
 
 const Login = () => {
     const { signInUser } = use(AuthContext)
+    const location = useLocation()
+    const navigate = useNavigate()
 
     const handleSignIn = (e) => {
         e.preventDefault()
@@ -16,6 +18,8 @@ const Login = () => {
         signInUser(email, password)
             .then(result => {
                 toast.success(`login with: ${result.user.email}`)
+                navigate(`${location.state ? location.state : "/"}`)
+
             })
             .catch(error => {
                 alert(error)

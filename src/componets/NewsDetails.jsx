@@ -9,7 +9,7 @@ const NewsDetails = () => {
     const AllNews = useLoaderData();
     const news = AllNews.find(news => news.id == id);
 
-    const { title, image_url, details } = news;
+    const { title, image_url, details, category_id } = news;
 
     return (
         <div className='mt-4 w-[60vw] m-auto'>
@@ -26,9 +26,9 @@ const NewsDetails = () => {
                         </p>
                         <p className='text-accent'>
                             {details}
-                        </p>  
+                        </p>
 
-                        <Link to={-1}>
+                        <Link to={`/category/${category_id}`}>
                             <button className='btn btn-secondary text-white'>
                                 <FaArrowLeft />
                                 All news in this category

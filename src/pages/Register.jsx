@@ -1,10 +1,13 @@
 import React, { use } from 'react';
-import { Link, Navigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../Provider/AuthContext';
 import { toast } from 'react-toastify';
+import { auth } from '../Firebase/firebase.config';
 
 const Register = () => {
-    const { signUpUser } = use(AuthContext)
+    const { signUpUser, updateUserProfile } = use(AuthContext)
+    const navigate = useNavigate()
+    console.log(auth.currentUser)
 
     const handleRegister = (e) => {
         e.preventDefault()
@@ -13,12 +16,19 @@ const Register = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         const photo_url = e.target.photo_url.value;
-        
+
         signUpUser(email, password)
-        .then(result => {
-            toast.success(`Registerd with: ${result.user.email}`)
-        })
-        .catch(error => alert(error))
+            .then(result => {
+                updateUserProfile({ displayName: name, photoURL: photo_url })
+                    .then(() => {
+                        toast.success(`Registerd with: ${result.user.email}`);
+                        navigate("/")
+                    })
+                    .catch(error => {
+                        alert(error)
+                    })
+            })
+            .catch(error => alert(error))
 
     }
 

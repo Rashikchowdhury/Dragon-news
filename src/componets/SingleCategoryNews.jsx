@@ -9,6 +9,7 @@ const SingleCategoryNews = ({ news }) => {
 
     const publishedDate = new Date(author.published_date).toLocaleDateString()
 
+
     return (
         <div className={"rounded-xl shadow-md"}>
             <div className='flex justify-between items-center bg-base-200 p-3 rounded-t-xl'>
