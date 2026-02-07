@@ -10,7 +10,6 @@ const RightAside = () => {
     return (
         <div className='space-y-8'>
             {currentUser ? "" : <SocialLogin></SocialLogin>}
-            {/* <SocialLogin></SocialLogin> */}
             <FindUs></FindUs>
             <QZone></QZone>
         </div>
