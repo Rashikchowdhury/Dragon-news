@@ -11,7 +11,7 @@ const SingleCategoryNews = ({ news }) => {
 
 
     return (
-        <div className={"rounded-xl shadow-md"}>
+        <div className={"rounded-xl hover:shadow-2xl transition-shadow"}>
             <div className='flex justify-between items-center bg-base-200 p-3 rounded-t-xl'>
                 <div className='flex gap-2 items-center'>
                     <div>
