@@ -2,6 +2,7 @@ import React from 'react';
 import { FaRegBookmark } from 'react-icons/fa';
 import { IoMdShare } from 'react-icons/io';
 import { Link } from 'react-router';
+import { IoEyeOutline } from "react-icons/io5";
 
 const SingleCategoryNews = ({ news }) => {
 
@@ -69,7 +70,7 @@ const SingleCategoryNews = ({ news }) => {
                         </div>
                         <p>{rating.number}</p>
                     </div>
-                    <p>{total_view}</p>
+                    <p className='flex items-center gap-1'><IoEyeOutline size={20} /> {total_view}</p>
                 </div>
             </div>
         </div>
