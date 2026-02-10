@@ -5,15 +5,25 @@ import { AuthContext } from '../Provider/AuthContext';
 import { toast } from 'react-toastify';
 
 const SocialLogin = () => {
-    const { signInWithGoogle } = use(AuthContext)
+    const { signInWithGoogle, signInWithGithub } = use(AuthContext)
 
     const handleGoogleSignIn = () => {
         signInWithGoogle()
+            .then(result => {
+                toast.success(`${result.user.email} loged in successfully`)
+            })
+            .catch(error => {
+                toast.error(error)
+            })
+    }
+
+    const handleGithubSignIn = () => {
+        signInWithGithub()
         .then(result => {
-            toast.success(`${result.user.email} loged in successfully`)
+            console.log(result);
         })
         .catch(error => {
-            toast.error(error)
+            alert(error)
         })
     }
     return (
@@ -23,7 +33,7 @@ const SocialLogin = () => {
                 <button onClick={handleGoogleSignIn} className="btn btn-outline btn-secondary">
                     <FcGoogle size={20} /> Login with Google
                 </button>
-                <button className="btn btn-outline btn-primary">
+                <button onClick={handleGithubSignIn} className="btn btn-outline btn-primary">
                     <FaGithub size={20} /> Login with Github
                 </button>
             </div>
